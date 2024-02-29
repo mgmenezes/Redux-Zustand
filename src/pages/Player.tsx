@@ -2,8 +2,12 @@ import { MessageCircle } from "lucide-react";
 import Header from "../components/Header";
 import Video from "../components/Video";
 import Module from "../components/Module";
+import { useAppSelector } from "../store";
 
 export default function Player() {
+  const modules = useAppSelector(state=>{return state.player.course.modules})
+
+
   return (
     <div className="h-screen bg-zinc-950 text-zinc-50 flex justify-center items-center">
       <div className="flex w-[1110px] md-[768px] sm-[640px] flex-col gap-6">
@@ -24,9 +28,12 @@ export default function Player() {
              scrollbar-track-zinc-950 
              scrollbar-thumb-zinc-700"
           >
-            <Module moduleIndex={0} title="Redux" amountLessons={12} />
-            <Module moduleIndex={1} title="Redux" amountLessons={12} />
-            <Module moduleIndex={2} title="Redux" amountLessons={12} />
+            {
+              modules.map((module,index) => {
+                return (<Module key={module.id} moduleIndex={index} title={module.title} amountLessons={module.lessons.length} />)
+              })
+            }
+
           </aside>
         </main>
       </div>
