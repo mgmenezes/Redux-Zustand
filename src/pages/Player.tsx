@@ -5,8 +5,9 @@ import Module from "../components/Module";
 import { useAppSelector } from "../store";
 
 export default function Player() {
-  const modules = useAppSelector(state=>{return state.player.course.modules})
-
+  const modules = useAppSelector((state) => {
+    return state.player.course.modules;
+  });
 
   return (
     <div className="h-screen bg-zinc-950 text-zinc-50 flex justify-center items-center">
@@ -28,12 +29,16 @@ export default function Player() {
              scrollbar-track-zinc-950 
              scrollbar-thumb-zinc-700"
           >
-            {
-              modules.map((module,index) => {
-                return (<Module key={module.id} moduleIndex={index} title={module.title} amountLessons={module.lessons.length} />)
-              })
-            }
-
+            {modules.map((module, index) => {
+              return (
+                <Module
+                  key={module.id}
+                  moduleIndex={index}
+                  title={module.title}
+                  amountLessons={module.lessons.length}
+                />
+              );
+            })}
           </aside>
         </main>
       </div>
